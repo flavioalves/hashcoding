@@ -1,0 +1,26 @@
+extends ../layouts/layout
+
+block content
+	p.tagline
+		| What's up on software development world?
+	#box-container
+
+	button#load-more.btn Load more
+
+	script
+		$(function() {
+			$('#box-container').masonry({
+				itemSelector : '.box',
+				columnWidth : 220,
+				gutterWidth : 20,
+				isAnimated : true
+			});
+			$('#load-more').button().click(function() {
+				var btn = $(this);
+				btn.button('loading');
+				hashcoding.currentPage += 1;
+				hashcoding.loadSocialMentions(hashcoding.currentPage, function() {
+					btn.button('reset');
+				});
+			});
+		});

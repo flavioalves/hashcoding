@@ -1,0 +1,74 @@
+doctype 5
+
+html
+
+	head
+		title #coding | what's up on software development world?
+
+		meta(property="og:url", content="http://www.hashcoding.com/")
+		meta(property="og:locale", content="en_US")
+		meta(property="og:image", content="http://www.hashcoding.com/images/avatar.png")
+		meta(property="og:title", content="#coding | what's up on software development world?")
+		meta(property="og:description", content="A software development social aggregator. Tweet or post a photo on Instagram using #coding to participate!")
+		meta(property="og:site_name", content="hashcoding")
+		meta(property="fb:admins", content="802059203")
+
+		block head
+
+			link(rel="shortcut icon", href="/favicon.ico")
+			link(rel="stylesheet", type="text/css", href="/stylesheets/bootstrap-responsive.css")
+			link(rel="stylesheet", type="text/css", href="/stylesheets/bootstrap.css")
+			link(rel="stylesheet", type="text/css", href="/stylesheets/style.css")
+
+			script(src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js", type="text/javascript")
+			script(src="/javascripts/bootstrap.js", type="text/javascript")
+			script(src="/javascripts/jquery.imagesLoaded.js", type="text/javascript")
+			script(src="/javascripts/jquery.masonry.js", type="text/javascript")
+			script(src="/javascripts/jquery.timeago.js", type="text/javascript")
+			script(src="/javascripts/mustache.js", type="text/javascript")
+			script(src="/javascripts/underscore.js", type="text/javascript")
+			script(src="/javascripts/hashcoding.js", type="text/javascript")
+
+	body
+		#fb-root
+		#about-modal.modal.fade
+			.modal-header
+				button.close(data-dismiss="modal") x
+				h3 About #coding
+			.modal-body
+				p 
+					| This little project was a proof of concept of Node.JS + New Windows Azure Platform + MongoDB.
+					| Soon I'll post more details about this project and I'll share some code and tutorials with 
+					| you guys who apassionate about #coding like me. Stay tuned!
+				div
+					a(href="http://www.twitter.com/hashcoding")@hashcoding
+					span &nbsp;by&nbsp;
+					a(href="http://www.twitter.com/drochetti")@drochetti
+			.modal-footer
+				a.btn.btn-primary(data-dismiss="modal") Close
+		block header
+			.fluid.header
+				.container
+					header#header.row
+						button#show-about-button.btn About
+						h1.logo
+							img(alt="hashcoding logo", src="/images/logo.png")
+
+		.fluid.content
+			.container
+				.social-plugins
+					a.twitter-share-button(href="https://twitter.com/share", data-url="http://www.hashcoding.com",
+						data-text="Check out the new #geek #software #development social aggregator",
+						data-via="hashcoding", data-related="drochetti", data-hashtags="coding") Tweet
+					.fb-like(data-href="http://www.facebook.com/hashcoding",
+						data-send="false", data-layout="button_count",
+						data-width="100", data-show-faces="false")
+				block content
+
+		block footer
+			.fluid.footer
+				.container
+					footer#footer
+						p Copyright 2012
+
+		script(src="/javascripts/external-services.js", type="text/javascript")

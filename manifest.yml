@@ -1,0 +1,16 @@
+---
+applications:
+  .:
+    name: hashcoding
+    framework:
+      name: node
+      info:
+        mem: 64M
+        description: Node.js Application
+        exec: 
+    url: ${name}.${target-base}
+    mem: 256M
+    instances: 1
+    services:
+      mongodb-hashcoding:
+        type: mongodb
