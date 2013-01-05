@@ -1,2 +1,5 @@
 hashcoding.tmproj
-hashcoding.tmproj
+log
+node_modules
+/.settings
+/.project
