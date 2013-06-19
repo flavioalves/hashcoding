@@ -18,8 +18,8 @@ block content
 			$('#load-more').button().click(function() {
 				var btn = $(this);
 				btn.button('loading');
-				hashcoding.currentPage += 1;
-				hashcoding.loadSocialMentions(hashcoding.currentPage, function() {
+				ocupabrasil.currentPage += 1;
+				ocupabrasil.loadSocialMentions(ocupabrasil.currentPage, function() {
 					btn.button('reset');
 				});
 			});

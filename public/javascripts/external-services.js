@@ -1,7 +1,7 @@
 // Google analytics
 var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-32588733-1']);
-_gaq.push(['_setDomainName', 'hashcoding.com']);
+_gaq.push(['_setDomainName', 'ocupabrasil.com']);
 _gaq.push(['_trackPageview']);
 (function() {
 	var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;

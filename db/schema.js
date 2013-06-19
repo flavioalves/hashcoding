@@ -17,13 +17,13 @@ function connect() {
 		mongoose.connect(uri);
 	} else {
 		// mongoose.connect(process.env.MONGO_URI || 'mongodb://nodejitsu:d95d0a4df9d250ff920fcd10774bd4a8@flame.mongohq.com:27042/nodejitsudb643424107809');
-		mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/hashcoding');
+		mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/ocupabrasil');
 	}
 }
 
 customSchema(function() {
 	//console.log(process.env.MONGO_URI);
-	//mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost/hashcoding');
+	//mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost/ocupabrasil');
 	connect();
 
 /*

@@ -1,5 +1,5 @@
 {
-  "name": "hashcoding",
+  "name": "ocupabrasil",
   "version": "0.1.0",
   "engines": {
     "node": "0.6.x"
@@ -10,13 +10,13 @@
   },
   "main": "server.js",
   "dependencies": {
-    "jade": ">= 0.26.0",
+    "jade": "0.26.0",
     "jade-ext": ">= 0.0.5",
     "express": ">= 2.5.8",
     "railway": ">= 0.1.6",
     "jugglingdb": ">= 0.1.9",
     "coffee-script": ">= 1.1.1",
-    "mongoose": ">= 2.6.3",
+    "mongoose": "2.6.3",
     "mongodb": ">= 0.9.4-5",
     "connect-mongo": ">= 0.1.9",
     "mongoose-auth": ">= 0.0.2",
@@ -33,5 +33,5 @@
     "nodeunit": "*",
     "sinon": "*"
   },
-  "subdomain": "hashcoding"
+  "subdomain": "ocupabrasil"
 }

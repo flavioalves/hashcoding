@@ -1,4 +1,4 @@
-var hashcoding = {
+var ocupabrasil = {
 
 	currentPage : 1,
 
@@ -51,15 +51,15 @@ var hashcoding = {
 			return new Date(this.createdAt).toLocaleString();
 		},
 		formattedText : function() {
-			var _f = hashcoding.formatter;
+			var _f = ocupabrasil.formatter;
 			var s = this.source;
 			return _f.formatHashtag(_f.formatUserMention(_f.formatLink(this.text, s), s), s);
 		},
 		usernameLink : function() {
-			return hashcoding.formatter.formatUserMention('@' + this.userName, this.source);
+			return ocupabrasil.formatter.formatUserMention('@' + this.userName, this.source);
 		},
 		sourceUrl : function() {
-			return hashcoding.sourceUrls[this.source].main;
+			return ocupabrasil.sourceUrls[this.source].main;
 		},
 		mediaUrl : function() {
 			return _.find(this.media || [], function(media) {
@@ -87,11 +87,11 @@ var hashcoding = {
 		$('#show-about-button').button().click(function() {
 			$('#about-modal').modal('show');
 		});
-		hashcoding.loadSocialMentions();
+		ocupabrasil.loadSocialMentions();
 	},
 
 	loadSocialMentions : function(page, onEnd) {
-		page = page || hashcoding.currentPage;
+		page = page || ocupabrasil.currentPage;
 		var $boxContainer = $('#box-container');
 		$.ajax({
 			url : '/mentions',
@@ -101,9 +101,9 @@ var hashcoding = {
 				page : page
 			},
 			success : function(data, textStatus, req) {
-				hashcoding.trackPageView('/mentions/page/' + page);
+				ocupabrasil.trackPageView('/mentions/page/' + page);
 				$.each(data.mentions, function(i, mention) {
-					var el = $(hashcoding.boxTemplate($.extend(mention, hashcoding.boxViewHelper)));
+					var el = $(ocupabrasil.boxTemplate($.extend(mention, ocupabrasil.boxViewHelper)));
 					el.dataRef = mention;
 					$boxContainer.append(el);
 					el.find('.timeago').timeago().tooltip();
@@ -140,23 +140,23 @@ var hashcoding = {
 
 		formatLink : function(text) {
 			return text.replace(/[A-Za-z]+:\/\/[A-Za-z0-9-_]+\.[A-Za-z0-9-_:%&~\?\/.=]+/g, function(url) {
-				return hashcoding.formatter.link(url, url, '_blank');
+				return ocupabrasil.formatter.link(url, url, '_blank');
 			});
 		},
 
 		formatUserMention : function(text, source) {
-			var url = hashcoding.sourceUrls[source].userProfile;
+			var url = ocupabrasil.sourceUrls[source].userProfile;
 			return text.replace(/[@]+[A-Za-z0-9-_]+/g, function(u) {
 				var username = u.replace('@', '');
-				return hashcoding.formatter.link(url + username, u, '_blank');
+				return ocupabrasil.formatter.link(url + username, u, '_blank');
 			});
 		},
 
 		formatHashtag : function(text, source) {
-			var url = hashcoding.sourceUrls[source].tag;
+			var url = ocupabrasil.sourceUrls[source].tag;
 			return text.replace(/[#]+[A-Za-z0-9-_]+/g, function(t) {
 				var tag = t.replace('#', '');
-				return hashcoding.formatter.link(url + tag, t, '_blank');
+				return ocupabrasil.formatter.link(url + tag, t, '_blank');
 			});
 		}
 
@@ -164,4 +164,4 @@ var hashcoding = {
 
 };
 
-$(hashcoding.init);
+$(ocupabrasil.init);

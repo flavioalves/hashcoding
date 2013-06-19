@@ -14,7 +14,7 @@ var TwitterSearchJob = module.exports = Class('TwitterSearchJob', {
 	isa : SocialSearchJob,
 	my : {
 		has : {
-			TWITTER_QUERY : '#coding OR #programming'
+			TWITTER_QUERY : '#ocupabrasil OR #protestoBR OR #protestoDF OR #protestoSP OR #protestoRJ OR #protestoBH'
 		}
 	},
 	has : {
@@ -23,10 +23,11 @@ var TwitterSearchJob = module.exports = Class('TwitterSearchJob', {
 	},
 	methods : {
 		search : function() {
+			console.log("TwitterSearchJob.search() ");
 			var _self = this;
 			SocialSearch.findMaxRefByTerms(_self.my.TWITTER_QUERY, _self.source, function(err, result) {
 				_self.searchTwitter(result && result[0] ? result[0].maxRef : null)
-			});
+			});			
 		},
 		searchTwitter : function(sinceId) {
 			var params = {
@@ -39,7 +40,12 @@ var TwitterSearchJob = module.exports = Class('TwitterSearchJob', {
 					since_id : sinceId
 				});
 			}
-			var url = 'http://search.twitter.com/search.json?' + querystring.stringify(params);
+
+			//var url = 'http://search.twitter.com/search.json?' + querystring.stringify(params);
+			var url = 'https://api.twitter.com/1.1/search/tweets.json?q=' + querystring.stringify(params) + '&rpp=10&include_entities=true&result_type=mixed';
+			console.log("TwitterSearchJob.searchTwitter() ");
+			console.log("URL: " + url);
+
 			var _self = this;
 			request(url, function(err, response, body) {
 				if (!err) {
@@ -56,6 +62,7 @@ var TwitterSearchJob = module.exports = Class('TwitterSearchJob', {
 			});
 		},
 		createSocialMention : function(tweet) {
+			console.log("TwitterSearchJob.createSocialMention() ");
 			var _self = this;
 			var source = _self.source;
 			SocialMention.findBySourceId(tweet.id_str, source, function(err, result) {
@@ -82,6 +89,7 @@ var TwitterSearchJob = module.exports = Class('TwitterSearchJob', {
 			});
 		},
 		extractTweetMedia : function(tweet) {
+
 			var media = [];
 			var tweetPhoto = _util.find(tweet.media || [], function(m) {
 				return m.type == 'photo';

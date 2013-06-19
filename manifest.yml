@@ -1,7 +1,7 @@
 ---
 applications:
   .:
-    name: hashcoding
+    name: ocupabrasil
     framework:
       name: node
       info:
@@ -12,5 +12,5 @@ applications:
     mem: 256M
     instances: 1
     services:
-      mongodb-hashcoding:
+      mongodb-ocupabrasil:
         type: mongodb

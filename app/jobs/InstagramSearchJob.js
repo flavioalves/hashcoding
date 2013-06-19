@@ -10,7 +10,7 @@ var CronJob = require('cron').CronJob,
 
 var oauth = require('../../config/oauth');
 
-var INSTAGRAM_QUERY_TAGS = ['coding', 'programming'];
+var INSTAGRAM_QUERY_TAGS = ['ocupabrasil', 'protestoBR', 'protestoDF', 'protestoSP', 'protestoRJ', 'protestoBH'];
 
 /**
  * @class InstagramSearchJob
