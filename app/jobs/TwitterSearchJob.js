@@ -1,20 +1,34 @@
-
 var CronJob = require('cron').CronJob,
 	util = require('util'),
 	_util = require('underscore'),
 	request = require('request'),
 	querystring = require('querystring'),
 	mongoose = require('mongoose'),
+	sys = require('sys'),
 	SocialSearch = mongoose.model('SocialSearch'),
 	SocialMention = mongoose.model('SocialMention'),
 	Class = require('joose').Class,
-	SocialSearchJob = require('./SocialSearchJob');
+	SocialSearchJob = require('./SocialSearchJob'),
+	OAuth= require('oauth').OAuth;
 
+	//Auth keys
+	var ACCESS_TOKEN = "14138859-hF4Pb6ZxhxRvnADrOJz8JLApjT2rlJ3LebWQ0Uwak";
+	var ACCESS_TOKEN_SECRET = "ZNOPyjg0Zh4rK5vpamEMi9rybO2x5Du7Vx5fsb9psc";
+	var CONSUMER_KEY = "me9LNbhVRcDiydN8tLbg7g";
+	var CONSUMER_SECRET = "fjF96PcSgtamV1HFIvCetcHvFDXnOIe3FX6gMXxzI";
+
+	//Getting OAuth access token
+	var oa = new OAuth("https://twitter.com/oauth/request_token",
+                 "https://twitter.com/oauth/access_token", 
+                 CONSUMER_KEY, CONSUMER_SECRET, 
+                 "1.0A", "http://localhost:3000/oauth/callback", "HMAC-SHA1");
+
+  
 var TwitterSearchJob = module.exports = Class('TwitterSearchJob', {
 	isa : SocialSearchJob,
 	my : {
 		has : {
-			TWITTER_QUERY : '#ocupabrasil OR #protestoBR OR #protestoDF OR #protestoSP OR #protestoRJ OR #protestoBH'
+			TWITTER_QUERY : '#ocupabrasil OR #vemprarua OR #protestoBR OR #protestoDF OR #protestoSP OR #protestoRJ OR #protestoBH'
 		}
 	},
 	has : {
@@ -29,6 +43,7 @@ var TwitterSearchJob = module.exports = Class('TwitterSearchJob', {
 				_self.searchTwitter(result && result[0] ? result[0].maxRef : null)
 			});			
 		},
+
 		searchTwitter : function(sinceId) {
 			var params = {
 				q : this.my.TWITTER_QUERY,
@@ -41,26 +56,27 @@ var TwitterSearchJob = module.exports = Class('TwitterSearchJob', {
 				});
 			}
 
-			//var url = 'http://search.twitter.com/search.json?' + querystring.stringify(params);
-			var url = 'https://api.twitter.com/1.1/search/tweets.json?q=' + querystring.stringify(params) + '&rpp=10&include_entities=true&result_type=mixed';
-			console.log("TwitterSearchJob.searchTwitter() ");
-			console.log("URL: " + url);
-
+			var url = 'https://api.twitter.com/1.1/search/tweets.json?' + querystring.stringify(params);
 			var _self = this;
-			request(url, function(err, response, body) {
-				if (!err) {
-					var res = JSON.parse(body);
-					var tweets = res.results || [];
-					_util.each(tweets, function(tweet) {
-						_self.createSocialMention(tweet);
-					});
-					_self.recordSearch(_self.my.TWITTER_QUERY, tweets,
-						res.since_id_str, res.max_id_str);	
-				} else {
-					// TODO handle
+
+			oa.get(url, 
+				ACCESS_TOKEN, 
+				ACCESS_TOKEN_SECRET, 
+				function(error, data) {
+					if(!error){
+						var res = JSON.parse(data);
+						var tweets = res.statuses || [];
+						_util.each(tweets, function(tweet) {
+							_self.createSocialMention(tweet);
+						});
+						_self.recordSearch(_self.my.TWITTER_QUERY, tweets, res.since_id_str, res.max_id_str);	
+					} else {
+						console.log("ERROR: when getting twitter data");
+					}
 				}
-			});
+			);
 		},
+
 		createSocialMention : function(tweet) {
 			console.log("TwitterSearchJob.createSocialMention() ");
 			var _self = this;
@@ -88,6 +104,7 @@ var TwitterSearchJob = module.exports = Class('TwitterSearchJob', {
 				}
 			});
 		},
+		
 		extractTweetMedia : function(tweet) {
 
 			var media = [];

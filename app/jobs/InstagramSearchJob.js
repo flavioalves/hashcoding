@@ -10,13 +10,8 @@ var CronJob = require('cron').CronJob,
 
 var oauth = require('../../config/oauth');
 
-var INSTAGRAM_QUERY_TAGS = ['ocupabrasil', 'protestoBR', 'protestoDF', 'protestoSP', 'protestoRJ', 'protestoBH'];
+var INSTAGRAM_QUERY_TAGS = ['pivotabrasil', 'ocupabrasil', 'vemprarua', 'protestoBR', 'protestoDF', 'protestoSP', 'protestoRJ', 'protestoBH'];
 
-/**
- * @class InstagramSearchJob
- * @inherits SocialSearchJob
- * @author Daniel Rochetti
- */
 var InstagramSearchJob = module.exports = Class('InstagramSearchJob', {
 	// subclass of
 	isa : SocialSearchJob,

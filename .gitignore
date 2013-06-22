@@ -1,5 +1,6 @@
 ocupabrasil.tmproj
 log
 node_modules
+.DS_Store
 /.settings
 /.project
