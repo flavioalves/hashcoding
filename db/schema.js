@@ -15,9 +15,9 @@ function connect() {
 		var uri = util.format('mongodb://%s:%s@%s:%s/%s', credentials['username'], credentials['password'],
 			credentials['hostname'], credentials['port'], credentials['db']);
 		mongoose.connect(uri);
-	} else {
-		// mongoose.connect(process.env.MONGO_URI || 'mongodb://nodejitsu:d95d0a4df9d250ff920fcd10774bd4a8@flame.mongohq.com:27042/nodejitsudb643424107809');
-		mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/ocupabrasil');
+	} else {		
+		//mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/ocupabrasil');		
+		mongoose.connect(process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost:27017/ocupabrasil');
 	}
 }
 
