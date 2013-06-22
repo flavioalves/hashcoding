@@ -1,4 +1,5 @@
 var express = require('express'),
+    path = require('path'),
     lessMiddleware = require('less-middleware');
 
 app.configure(function(){
@@ -15,8 +16,7 @@ app.configure(function(){
   
   app.use(lessMiddleware({
     src      : publicDir,
-    compress : true,
-    force : true
+    compress : true
   }));
   
   app.set('view options', {
