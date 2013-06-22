@@ -78,7 +78,7 @@ var TwitterSearchJob = module.exports = Class('TwitterSearchJob', {
 		},
 
 		createSocialMention : function(tweet) {
-			console.log("TwitterSearchJob.createSocialMention() ");
+			//console.log("TwitterSearchJob.createSocialMention() ");
 			var _self = this;
 			var source = _self.source;
 			SocialMention.findBySourceId(tweet.id_str, source, function(err, result) {
@@ -104,7 +104,7 @@ var TwitterSearchJob = module.exports = Class('TwitterSearchJob', {
 				}
 			});
 		},
-		
+
 		extractTweetMedia : function(tweet) {
 
 			var media = [];

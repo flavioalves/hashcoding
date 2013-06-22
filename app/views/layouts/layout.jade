@@ -8,8 +8,8 @@ html
 		meta(property="og:url", content="http://www.ocupabrasil.com/")
 		meta(property="og:locale", content="en_US")
 		meta(property="og:image", content="http://www.ocupabrasil.com/images/avatar.png")
-		meta(property="og:title", content="#coding | what's up on software development world?")
-		meta(property="og:description", content="Tweet or post a photo on Instagram using #ocupabrasil to participate!")
+		meta(property="og:title", content="#pivotaBrasil ")
+		meta(property="og:description", content="Tweet or post a photo on Instagram using #pivotaBrasil to participate!")
 		meta(property="og:site_name", content="ocupabrasil")
 		meta(property="fb:admins", content="802059203")
 
@@ -34,14 +34,14 @@ html
 		#about-modal.modal.fade
 			.modal-header
 				button.close(data-dismiss="modal") x
-				h3 About #coding
+				h3 About #pivotaBrasil
 			.modal-body
 				p 
 					| This little project was a proof of concept of Node.JS + New Windows Azure Platform + MongoDB.
 					| Soon I'll post more details about this project and I'll share some code and tutorials with 
 					| you guys who apassionate about #coding like me. Stay tuned!
 				div
-					a(href="http://www.twitter.com/ocupabrasil")@ocupabrasil
+					a(href="http://www.twitter.com/pivotaBrasil")@pivotaBrasil
 					span &nbsp;by&nbsp;
 			.modal-footer
 				a.btn.btn-primary(data-dismiss="modal") Close
@@ -51,7 +51,7 @@ html
 					header#header.row
 						button#show-about-button.btn About
 						h1.logo
-							img(alt="ocupabrasil logo", src="/images/logo.png")
+							img(alt="ocupabrasil logo", src="/images/logo.png", style="margin-top: 10px;") 
 
 		.fluid.content
 			.container
@@ -68,6 +68,9 @@ html
 			.fluid.footer
 				.container
 					footer#footer
-						p Copyright 2012
+						.footer-about
+							span.pin
+							.about
+								Criado em <br/> Brasília
 
 		script(src="/javascripts/external-services.js", type="text/javascript")

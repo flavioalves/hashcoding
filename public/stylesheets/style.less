@@ -9,11 +9,11 @@
 @default-color: #404040;
 @blue-color: #1dacff;
 
-@import "/public/stylesheets/partial/elements";
+@import "@{dir}/partial/elements";
 
 .fluid {
 	&.header {
-		background: @body-bg-color url(../images/header-bg-pattern.png) repeat-x;
+		//background: @body-bg-color url(../images/header-bg-pattern.png) repeat-x;
 		height: @header-height;
 	}
 	&.content {
@@ -216,5 +216,25 @@ p.tagline {
 		line-height: 14px;
 		text-align: center;
 		text-shadow: -1px -1px 0 darken(@footer-bg-color, 15%);
+	}
+
+	.footer-about {
+		text-align: center;
+		margin: 30px;
+		font-size: 12px;
+		line-height: 15px;
+		color: #999;
+		font-weight: 500;	
+		
+		.pin {
+			margin-bottom: 4px;
+			background-size: 100%;
+			background-image: url('../images/pin.png');
+			width: 22px;
+			height: 38px;
+			display: inline-block;
+			vertical-align: top;
+			zoom: 1;
+		}
 	}
 }
