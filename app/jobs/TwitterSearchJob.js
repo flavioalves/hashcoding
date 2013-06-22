@@ -22,7 +22,6 @@ var CronJob = require('cron').CronJob,
                  "https://twitter.com/oauth/access_token", 
                  CONSUMER_KEY, CONSUMER_SECRET, 
                  "1.0A", "http://localhost:3000/oauth/callback", "HMAC-SHA1");
-
   
 var TwitterSearchJob = module.exports = Class('TwitterSearchJob', {
 	isa : SocialSearchJob,

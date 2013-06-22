@@ -1,4 +1,5 @@
 var express = require('express'),
+    path = require('path'),
     lessMiddleware = require('less-middleware');
 
 app.configure(function(){
