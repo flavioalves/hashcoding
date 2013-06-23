@@ -1,6 +1,6 @@
 var express = require('express'),
     path = require('path'),
-    lessMiddleware = require('less-middleware');
+    less = require('less-middleware');
 
 app.configure(function(){
   console.log("app.configure() ");
@@ -8,17 +8,20 @@ app.configure(function(){
   var cwd = process.cwd();
   var publicDir = cwd + '/public';
 
-  console.log("cwd = " + cwd);
+  console.log("cwd       = " + cwd);
   console.log("publicDir = " + publicDir);
+  console.log("__dirname = " + __dirname);
 
   app.set('views', cwd + '/app/views');
   app.set('view engine', 'jade');
-  
-  app.use(lessMiddleware({
-    src      : publicDir,
+
+  app.use(less({
+    src: path.join(publicDir, 'public'),
+    paths: [path.join(publicDir, 'module', 'less')],
     compress : true,
+    force: true
   }));
-  
+
   app.set('view options', {
   complexNames : true,
     layout : false
@@ -31,9 +34,10 @@ app.configure(function(){
   app.use(express.cookieParser('secret'));
   app.use(express.methodOverride());
   app.use(app.router);
-  app.use(express.static(publicDir, {
-    maxAge : 86400000
-  }));
+  app.use(express.static(publicDir));
+  // app.use(express.static(publicDir, {
+  //   maxAge : 86400000
+  // }));
 });
 
 /*
