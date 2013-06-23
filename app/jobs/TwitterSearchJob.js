@@ -36,7 +36,7 @@ var TwitterSearchJob = module.exports = Class('TwitterSearchJob', {
 	},
 	methods : {
 		search : function() {
-			console.log("TwitterSearchJob.search() ");
+			//console.log("TwitterSearchJob.search() ");
 			var _self = this;
 			SocialSearch.findMaxRefByTerms(_self.my.TWITTER_QUERY, _self.source, function(err, result) {
 				_self.searchTwitter(result && result[0] ? result[0].maxRef : null)
