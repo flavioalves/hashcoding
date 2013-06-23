@@ -55,7 +55,8 @@ var TwitterSearchJob = module.exports = Class('TwitterSearchJob', {
 				});
 			}
 
-			var url = 'https://api.twitter.com/1.1/search/tweets.json?' + querystring.stringify(params);
+			//var url = 'https://api.twitter.com/1.1/search/tweets.json?' + querystring.stringify(params);
+			var url = 'https://api.twitter.com/1.1/search/tweets.json?q=pivotabrasil';
 			var _self = this;
 
 			oa.get(url, 

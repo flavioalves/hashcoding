@@ -16,7 +16,7 @@ app.configure(function(){
   
   app.use(lessMiddleware({
     src      : publicDir,
-    compress : true
+    compress : true,
   }));
   
   app.set('view options', {
