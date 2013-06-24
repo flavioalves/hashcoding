@@ -11,16 +11,11 @@ var CronJob = require('cron').CronJob,
 	SocialSearchJob = require('./SocialSearchJob'),
 	OAuth= require('oauth').OAuth;
 
-	//Auth keys
-	var ACCESS_TOKEN = "14138859-hF4Pb6ZxhxRvnADrOJz8JLApjT2rlJ3LebWQ0Uwak";
-	var ACCESS_TOKEN_SECRET = "ZNOPyjg0Zh4rK5vpamEMi9rybO2x5Du7Vx5fsb9psc";
-	var CONSUMER_KEY = "me9LNbhVRcDiydN8tLbg7g";
-	var CONSUMER_SECRET = "fjF96PcSgtamV1HFIvCetcHvFDXnOIe3FX6gMXxzI";
+	var oauthKeys = require('../../config/oauth');
 
-	//Getting OAuth access token
 	var oa = new OAuth("https://twitter.com/oauth/request_token",
                  "https://twitter.com/oauth/access_token", 
-                 CONSUMER_KEY, CONSUMER_SECRET, 
+                 oauthKeys.twitter.consumerKey, oauthKeys.twitter.consumerSecret, 
                  "1.0A", "http://localhost:3000/oauth/callback", "HMAC-SHA1");
   
 var TwitterSearchJob = module.exports = Class('TwitterSearchJob', {
@@ -60,8 +55,8 @@ var TwitterSearchJob = module.exports = Class('TwitterSearchJob', {
 			var _self = this;
 
 			oa.get(url, 
-				ACCESS_TOKEN, 
-				ACCESS_TOKEN_SECRET, 
+				oauthKeys.twitter.accessToken, 
+				oauthKeys.twitter.accessTokenSecret, 
 				function(error, data) {
 					if(!error){
 						var res = JSON.parse(data);
@@ -78,7 +73,8 @@ var TwitterSearchJob = module.exports = Class('TwitterSearchJob', {
 		},
 
 		createSocialMention : function(tweet) {
-			//console.log("TwitterSearchJob.createSocialMention() ");
+			//console.log("TwitterSearchJob.createSocialMention() " + tweet.user.screen_name);
+
 			var _self = this;
 			var source = _self.source;
 			SocialMention.findBySourceId(tweet.id_str, source, function(err, result) {
@@ -90,11 +86,11 @@ var TwitterSearchJob = module.exports = Class('TwitterSearchJob', {
 						tags : _util.invoke(_util.pluck(tags, 'text'), 'toLowerCase'),
 						media : _self.extractTweetMedia(tweet),
 						text : tweet.text,
-						permaLink : util.format('https://twitter.com/#!/%s/status/%s', tweet.from_user, tweet.id_str),
+						permaLink : util.format('https://twitter.com/#!/%s/status/%s', tweet.user.screen_name, tweet.id_str),
 						createdAt : Date.parse(tweet.created_at),
-						userId : tweet.from_user_id_str,
-						userName : tweet.from_user,
-						userDisplayName : tweet.from_user_name
+						userId : tweet.user.id,
+						userName : tweet.user.screen_name,
+						userDisplayName : tweet.user.name
 					});
 					codingMention.save(function(err) {
 						if (!err) {
