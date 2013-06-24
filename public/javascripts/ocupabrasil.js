@@ -87,14 +87,21 @@ var ocupabrasil = {
 		$('#show-about-button').button().click(function() {
 			$('#about-modal').modal('show');
 		});
-		ocupabrasil.loadSocialMentions();
+
+		$('#show-about-button').button().click(function() {
+			ocupabrasil.loadSocialMentions(null, null, '/mentions/photos');
+		});
+
+		var baseUrl = '/mentions';
+		ocupabrasil.loadSocialMentions(null, null, baseUrl);
+
 	},
 
-	loadSocialMentions : function(page, onEnd) {
+	loadSocialMentions : function(page, onEnd, actionUrl) {
 		page = page || ocupabrasil.currentPage;
 		var $boxContainer = $('#box-container');
 		$.ajax({
-			url : '/mentions',
+			url : actionUrl,
 			type : 'get',
 			dataType : 'json',
 			data : {

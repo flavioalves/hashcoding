@@ -36,3 +36,16 @@ action(function index() {
 			});
 		});
 });
+
+
+action(function photos(){
+	var page = req.query.page || 1;
+	seq()	
+		.par('instagramMentions', function() {
+			var pageLimit = 10;
+			SocialMention.findAllOrderByRecent(SocialMention.SOURCE_INSTAGRAM, {
+				start : (page - 1) * pageLimit,
+				limit : pageLimit
+			}, this);
+		})
+});

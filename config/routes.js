@@ -7,5 +7,6 @@ exports.routes = function(map) {
 
 	map.root('home#index');
 	map.get('/mentions', 'mentions#index');
+  map.get('/mentions/photos', 'mentions#photos');
 
 };
